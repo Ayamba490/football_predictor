@@ -38,7 +38,7 @@ class _PredictionsScreenState extends State<PredictionsScreen> {
   bool isLoading = true;
   String? error;
   int selectedLeague = 0; // 0 = All leagues
-  
+
   final List<Map<String, dynamic>> leagues = [
     {'id': 0, 'name': 'All Leagues', 'flag': '⚽'},
     {'id': 39, 'name': 'Premier League', 'flag': '🏴󠁧󠁢󠁥󠁮󠁧󠁿'},
@@ -48,10 +48,11 @@ class _PredictionsScreenState extends State<PredictionsScreen> {
     {'id': 2, 'name': 'Champions League', 'flag': '🏆'},
     {'id': 1, 'name': 'World Cup 2026', 'flag': '🌍'},
   ];
-  
+
   // Change this to your computer's local IP when testing
   // Find it by running: ipconfig (Windows) or ifconfig (Mac/Linux)
-  final String apiUrl = 'http://localhost:5000'; // Change to your PC IP like: http://192.168.1.5:5000
+  final String apiUrl =
+      'http://localhost:5000'; //Change to your PC IP like:'https://football-predictor-7xcg.onrender.com';
 
   @override
   void initState() {
@@ -70,10 +71,12 @@ class _PredictionsScreenState extends State<PredictionsScreen> {
       if (selectedLeague > 0) {
         url += '?league=$selectedLeague';
       }
-      
-      final response = await http.get(
-        Uri.parse(url),
-      ).timeout(const Duration(seconds: 10));
+
+      final response = await http
+          .get(
+            Uri.parse(url),
+          )
+          .timeout(const Duration(seconds: 10));
 
       if (response.statusCode == 200) {
         final data = json.decode(response.body);
@@ -91,7 +94,7 @@ class _PredictionsScreenState extends State<PredictionsScreen> {
       });
     }
   }
-  
+
   List<dynamic> get filteredPredictions {
     if (selectedLeague == 0) return predictions;
     return predictions.where((p) {
@@ -109,7 +112,7 @@ class _PredictionsScreenState extends State<PredictionsScreen> {
   @override
   Widget build(BuildContext context) {
     final displayPredictions = filteredPredictions;
-    
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('⚽ Match Predictions'),
@@ -170,7 +173,7 @@ class _PredictionsScreenState extends State<PredictionsScreen> {
               ],
             ),
           ),
-          
+
           // Match list
           Expanded(
             child: isLoading
@@ -182,7 +185,8 @@ class _PredictionsScreenState extends State<PredictionsScreen> {
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              const Icon(Icons.error_outline, size: 60, color: Colors.red),
+                              const Icon(Icons.error_outline,
+                                  size: 60, color: Colors.red),
                               const SizedBox(height: 20),
                               Text(
                                 error!,
@@ -199,14 +203,16 @@ class _PredictionsScreenState extends State<PredictionsScreen> {
                         ),
                       )
                     : displayPredictions.isEmpty
-                        ? const Center(child: Text('No matches for selected league'))
+                        ? const Center(
+                            child: Text('No matches for selected league'))
                         : RefreshIndicator(
                             onRefresh: fetchPredictions,
                             child: ListView.builder(
                               padding: const EdgeInsets.all(16),
                               itemCount: displayPredictions.length,
                               itemBuilder: (context, index) {
-                                return MatchCard(prediction: displayPredictions[index]);
+                                return MatchCard(
+                                    prediction: displayPredictions[index]);
                               },
                             ),
                           ),
