@@ -49,10 +49,8 @@ class _PredictionsScreenState extends State<PredictionsScreen> {
     {'id': 1, 'name': 'World Cup 2026', 'flag': '🌍'},
   ];
 
-  // Change this to your computer's local IP when testing
-  // Find it by running: ipconfig (Windows) or ifconfig (Mac/Linux)
   final String apiUrl =
-      'http://localhost:5000'; //Change to your PC IP like:'https://football-predictor-7xcg.onrender.com';
+      'https://football-predictor-7xg.onrender.com'; // ✅ Deployed on Render - works 24/7!
 
   @override
   void initState() {
