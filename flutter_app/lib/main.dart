@@ -50,7 +50,7 @@ class _PredictionsScreenState extends State<PredictionsScreen> {
   ];
 
   final String apiUrl =
-      'https://football-predictor-7xg.onrender.com'; // ✅ Deployed on Render - works 24/7!
+      'https://football-predictor-7xcg.onrender.com'; // ✅ Deployed on Render - works 24/7!
 
   @override
   void initState() {
